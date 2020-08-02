@@ -1,0 +1,234 @@
+%\usepackage{wasysym}
+\usepackage{bm}
+\usepackage{xparse}
+\usepackage{relsize}
+%\usepackage[firstpage]{draftwatermark} %http://choorucode.com/2010/05/05/latex-adding-draft-watermark/
+%\usepackage{eulervm}
+%\renewcommand{\rmdefault}{pplx}
+% \usepackage{perpage} %the perpage package
+% \MakePerPage{footnote} %the perpage package command
+% \usepackage{mathtools}
+% \mathtoolsset{showonlyrefs=true,showmanualtags=true}
+\newcommand{\re}{\mathbb{R}}
+\newcommand{\com}{\mathbb{C}}
+\newcommand{\nat}{\mathbb{N}}
+\newcommand{\rat}{\mathbb{Q}}
+
+\newcommand{\Rey}{\mathrm{Re}}
+
+
+\DeclareMathOperator{\sym}{sym}
+\DeclareMathOperator{\asym}{skew}
+%\newcommand{\sgrad}[1]{\mathop{\varepsilon(#1)}}
+%\DeclareMathOperator{\sgrad}{\mathbf{E}\!}
+\newcommand{\sgrad}[1]{\ensuremath{\mathrm{E}{#1}}}
+\newcommand{\skewgrad}[1]{\ensuremath{\mathrm{W}{#1}}}
+\newcommand{\CRop}[1]{\ensuremath{\mathrm{B}{#1}}}
+
+\newcommand{\tet}{\vartheta}
+\newcommand{\Tet}{\Theta}
+
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\ra}{\rightarrow}
+
+\newcommand{\pkt}{\boldsymbol{\cdot}}
+\def\longrightharpoonup{\relbar\joinrel\rightharpoonup}
+\newcommand{\Ac}{\mathcal{A}}
+\newcommand{\Bc}{\mathcal{B}}
+\newcommand{\Cc}{\mathcal{C}}
+\newcommand{\Dc}{\mathcal{D}}
+\newcommand{\Ec}{\mathcal{E}}
+\newcommand{\Fc}{\mathcal{F}}
+\newcommand{\Gc}{\mathcal{G}}
+\newcommand{\Hc}{\mathcal{H}}
+\newcommand{\Ic}{\mathcal{I}}
+\newcommand{\Jc}{\mathcal{J}}
+\newcommand{\Kc}{\mathcal{K}}
+\newcommand{\Lc}{\mathcal{L}}
+\newcommand{\Mc}{\mathcal{M}}
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\Oc}{\mathcal{O}}
+\newcommand{\Pc}{\mathcal{P}}
+\newcommand{\Qc}{\mathcal{Q}}
+\newcommand{\Rc}{\mathcal{R}}
+\newcommand{\Sc}{\mathcal{S}}
+\newcommand{\Tc}{\mathcal{T}}
+\newcommand{\Uc}{\mathcal{U}}
+\newcommand{\Vc}{\mathcal{V}}
+\newcommand{\Wc}{\mathcal{W}}
+\newcommand{\Xc}{\mathcal{X}}
+\newcommand{\Yc}{\mathcal{Y}}
+
+
+\newcommand{\Nbb}{\mathbb{N}}
+
+\newcommand{\ab}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\eb}{\mathbf{e}}
+\newcommand{\fb}{\mathbf{f}}
+\newcommand{\gb}{\mathbf{g}}
+\newcommand{\hb}{\mathbf{h}}
+\newcommand{\nb}{\mathbf{n}}
+\newcommand{\tb}{\mathbf{t}}
+\newcommand{\ub}{\mathbf{u}}
+\newcommand{\vb}{\mathbf{v}}
+\newcommand{\wb}{\mathbf{w}}
+\newcommand{\xb}{\mathbf{x}}
+\newcommand{\yb}{\mathbf{y}}
+\newcommand{\zb}{\mathbf{z}}
+
+
+
+%\newcommand{\Cb}{\mathbf{C}}
+\newcommand{\Db}{\mathbf{D}}
+%\newcommand{\Eb}{\mathbf{E}}
+\newcommand{\Fb}{\mathbf{F}}
+\newcommand{\Gb}{\mathbf{G}}
+\newcommand{\Hb}{\mathbf{H}}
+\newcommand{\Ib}{\mathbf{I}}
+\newcommand{\Pb}{\mathbf{P}}
+%\newcommand{\Qb}{\mathbf{Q}}
+%\newcommand{\Kb}{\mathbf{K}}
+%\newcommand{\Nb}{\mathbf{N}}
+%\newcommand{\Ub}{\mathbf{U}}
+\newcommand{\Tb}{\mathbf{T}}
+\newcommand{\Sb}{\mathbf{S}}
+\newcommand{\Ub}{\mathbf{U}}
+\newcommand{\Vb}{\mathbf{V}}
+\newcommand{\Wb}{\mathbf{W}}
+\newcommand{\Xb}{\mathbf{X}}
+\newcommand{\Yb}{\mathbf{Y}}
+\newcommand{\Zb}{\mathbf{Z}}
+
+\let\temp\phi
+\let\phi\varphi
+\let\varphi\temp
+
+\newcommand{\Phib}{\boldsymbol{\Phi}}
+\newcommand{\phib}{\boldsymbol{\phi}}
+
+\newcommand{\TX}{\ensuremath{\Tb_{\Xb}}}
+\newcommand{\vertiii}[1]{{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert #1 
+    \right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}}
+
+\newcommand{\Idb}{\mathrm{\mathbf{Id}}}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\Lip}{\mathrm{Lip}}
+\newcommand{\lLip}{\underline{\mathrm{Lip}}}
+
+\def\Proj_#1{\ensuremath{\operatorname{Proj}_{#1}\!}}
+\newcommand{\ind}{\mathbf{1}}
+\newcommand{\ilquote}[1]{``#1''}
+\newcommand{\dr}[1]{\ensuremath{\operatorname{d}\!{#1}}}
+\newcommand{\Dr}[1]{\ensuremath{\operatorname{D}\!{#1}}}
+\def\drs_#1{\ensuremath{\operatorname{d}_{#1}\!}}
+\def\Drs_#1{\ensuremath{\operatorname{D}_{#1}\!}}
+\def\Drs^#1{\ensuremath{\operatorname{D}^{#1}\!}}
+\newcommand{\Er}[1]{\ensuremath{\operatorname{E}\!{#1}}}
+\def\Ers_#1{\mathrm{E}_{#1}}
+\newcommand{\dm}{\mathrm{dim}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Corr}{\mathrm{Corr}}
+
+\newcommand{\aufz}{\leavevmode\vspace{-\baselineskip}}
+
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator*{\esup}{ess\,sup}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\diam}{diam}
+\newcommand{\const}{\mathrm{const}}
+\DeclareMathOperator{\tr}{{tr}}
+\DeclareMathOperator{\Tr}{{Tr}}
+\let\det\relax
+\DeclareMathOperator{\det}{{det}}
+\DeclareMathOperator{\supp}{supp}
+\let\div\relax
+\DeclareMathOperator{\div}{div}
+\DeclareMathOperator{\curl}{curl}
+\newcommand{\uX}{\underline{X}}
+\newcommand{\ux}{\underline{x}}
+\newcommand{\mres}{\mathbin{\vrule height 1.6ex depth 0pt width
+0.13ex\vrule height 0.13ex depth 0pt width 1.3ex}}
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\eqdef}{=\vcentcolon}
+\newcommand{\loc}{\mathrm{loc}}
+
+\def\xunderbrace#1_#2{{\underbrace{#1}_{\mathclap{#2}}}}
+\def\xoverbrace#1^#2{{\overbrace{#1}^{\mathclap{#2}}}}
+\def\xunderarrow#1_#2{{\underset{\overset{\uparrow}{\mathclap{#2}}}{#1}}}
+\def\xoverarrow#1^#2{{\overset{\underset{\downarrow}{\mathclap{#2}}}{#1}}}
+\let\weakto\rightharpoonup
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\trenner}[2]{
+    \begin{flushright}[#1]%
+        \vspace{0.001mm}%
+        \hrule %
+        \vspace{-0.02mm}%
+[#2]\end{flushright}}
+
+\DeclareDocumentCommand{\boxedeq}{m o}{%
+    \IfNoValueTF{#2}{%
+        \rlap{\boxed{#1}}%
+        \phantom{\hskip\fboxrule\hskip\fboxsep #1}%
+        }{%
+        \rlap{\boxed{#1#2}}%
+        \phantom{\hskip\fboxrule\hskip\fboxsep #1}&\phantom{#2}%
+    }%
+}
+
+
+
+\newcommand{\E}[2]{
+    \mathbb{E}_{#1}\l[#2\r]
+}
+\renewcommand{\P}[1]{
+    \mathbb{P}\l(#1\r)
+}
+\NewDocumentCommand\meq{m+g}{%
+\IfNoValueTF{#2}
+  {\overset{\mathsmaller{#1}}{=}}
+  {\overset{\mathsmaller{#1}}{\underset{\mathsmaller{#2}}=}}%
+}
+%\renewcommand{\=}[2]{
+%    \overset{\mathsmaller{#1}}{\underset{\mathsmaller{#2}}=}
+%}
+\catcode`@=11
+
+\def\nvphantom{\v@true\h@false\nph@nt}
+\def\nhphantom{\v@false\h@true\nph@nt}
+\def\nphantom{\v@true\h@true\nph@nt}
+\def\nph@nt{\ifmmode\def\next{\mathpalette\nmathph@nt}%
+\else\let\next\nmakeph@nt\fi\next}
+\def\nmakeph@nt#1{\setbox\z@\hbox{#1}\nfinph@nt}
+\def\nmathph@nt#1#2{\setbox\z@\hbox{$\m@th#1{#2}$}\nfinph@nt}
+\def\nfinph@nt{\setbox\tw@\null
+    \ifv@ \ht\tw@\ht\z@ \dp\tw@\dp\z@\fi
+\ifh@ \wd\tw@-\wd\z@\fi \box\tw@}
+
+\def\Xint#1{\mathchoice
+    {\XXint\displaystyle\textstyle{#1}}%
+    {\XXint\textstyle\scriptstyle{#1}}%
+    {\XXint\scriptstyle\scriptscriptstyle{#1}}%
+    {\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+\!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+\vcenter{\hbox{$#2#3$ }}\kern-.6\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+\newcommand{\claim}[1]{\textbf{Claim:} #1\\}
+\newcommand{\step}[2]{\textbf{Step #1:} #2\\}
+\newcommand{\subproof}{\textit{Proof: }}
+\newcommand{\phantomsign}{\hphantom{{ }+{ }}}
+\newcommand{\myplus}{{{ }+{ }}}
+\newcommand{\myminus}{{{ }-{ }}}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand{\pkg}[1]{\textsf{#1}}

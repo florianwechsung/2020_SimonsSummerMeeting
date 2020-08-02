@@ -1,0 +1,276 @@
+%! TeX program = lualatex -shell-escape
+\documentclass[aspectratio=1610, 10pt]{beamer}
+\usetheme{metropolis}
+\titlegraphic{
+    %\includegraphics[height=0.10\textheight]{./img/oxlogo.eps}
+    \hfill
+    \includegraphics[height=0.10\textheight]{./img/courant_short_black.png}
+    %\includegraphics[height=0.13\textheight]{./img/InFoMM.eps}
+}
+
+
+\title{Optimisation under uncertainty for direct Stellarator Optimisation}
+\date{August 04, 2020}
+\author{Florian Wechsung$\!\!~^\ast$}
+\institute{$\!\!~^\ast$Courant Institute of Mathematical Sciences, New York University}
+\usepackage{color,array}
+\makeatletter
+\def\zapcolorreset{\let\reset@color\relax\ignorespaces}
+\def\colorrows#1{\noalign{\aftergroup\zapcolorreset#1}\ignorespaces}
+\makeatother
+\usepackage{centernot}
+
+\usepackage{standalone}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
+%\usepackage{graphics}
+%\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{booktabs, tabularx, colortbl}
+\usepackage{changepage}
+\usepackage[noplaybutton]{media9}
+\usepackage[percent]{overpic}
+\usepackage{hyperref}
+\usepackage{attachfile2}
+\usepackage{calc}
+\usefonttheme[onlymath]{serif}
+\include{latex-includes/makros}
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{svg}
+\usepackage{tikz}
+\usetikzlibrary{tikzmark,calc,trees}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{math}
+\usetikzlibrary{intersections}
+\usetikzlibrary{through}
+\usetikzlibrary{decorations.pathreplacing,calc,decorations.markings}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{backgrounds}
+
+\usepackage{expl3}
+\usetikzlibrary{arrows}
+\usepackage{xspace}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{groupplots}
+\renewcommand{\Re}{\ensuremath{\mathrm{Re}}\xspace}
+\newcommand{\PtwoPzero}{\ensuremath{[\mathbb{P}_2]^2\mathrm{-}\mathbb{P}_0}\xspace}
+\newcommand{\PtwoPone}{\ensuremath{[\mathbb{P}_2]^2\mathrm{-}\mathbb{P}_1}\xspace}
+\newcommand{\PtwoPonedisc}{\ensuremath{[\mathbb{P}_2]^2\mathrm{-}\mathbb{P}_1^\text{disc}}\xspace}
+\newcommand{\PthreePtwodisc}{\ensuremath{[\mathbb{P}_3]^2\mathrm{-}\mathbb{P}_2^\text{disc}}\xspace}
+\newcommand{\PthreePtwodiscthreed}{\ensuremath{[\mathbb{P}_3]^3\mathrm{-}\mathbb{P}_2^\text{disc}}\xspace}
+\newcommand{\PfivePfourdisc}{\ensuremath{[\mathbb{P}_5]^3\mathrm{-}\mathbb{P}_4^\text{disc}}\xspace}
+
+\newcommand{\Pk}{\ensuremath{\mathbb{P}_k}\xspace}
+\newcommand{\Pkminusdisc}{\ensuremath{\mathbb{P}_{k-1}^\text{disc}}\xspace}
+\newcommand{\dgavgl}{{\bigg\{\!\!\!\bigg\{}}
+\newcommand{\dgavgr}{{\bigg\}\!\!\!\bigg\}}}
+\newcommand{\dgjmpl}{{\bigg[\!\!\bigg[}}
+\newcommand{\dgjmpr}{{\bigg]\!\!\bigg]}}
+\newcommand{\dgavgls}{{\big\{\!\!\big\{}}%
+\newcommand{\dgavgrs}{{\big\}\!\!\big\}}}%
+\newcommand{\dgjmpls}{{\big[\!\!\!\>\big[}}%
+\newcommand{\dgjmprs}{{\big]\!\!\!\>\big]}}%
+\newcommand{\dgjmplss}{{[\!\!\>[}}%
+\newcommand{\dgjmprss}{{]\!\!\>]}}%
+
+
+\definecolor{oxfordblue}{rgb}{0, 0.129411765, 0.278431373}
+\setbeamercolor{palette primary}{%
+  use=normal text,
+  fg=normal text.bg,
+  bg=oxfordblue,
+}
+\setbeamercolor{footline}{fg=gray}
+%\setbeamertemplate{frame footer}{\insertshortauthor}
+
+%\usepackage{minted}
+%\newminted{python}{linenos, numbersep=1pt, frame=single, numberblanklines=False}
+
+
+\NewDocumentCommand\MyArrow{O{0pt}mmmO{}}
+{%
+\begin{tikzpicture}[overlay, remember picture]
+  \draw [->,thick,line width=2pt,#4]
+	  ( $ ({pic cs:#3}|-{pic cs:#2}) + (-#1,0.4ex) $ )  to[out=0,in=0] node[right]{#5}
+	( $ (pic cs:#3) + (-#1,1ex) $ );
+\end{tikzpicture}%
+}
+
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+
+\usepackage{pgfplots}
+\pgfdeclarelayer{background}% determine background layer
+\pgfsetlayers{background,main}% order of layers
+\tikzset{
+    invisible/.style={opacity=0},
+    visible on/.style={alt={#1{}{invisible}}},
+    alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+    },
+  }
+\definecolor{blue}{rgb}{0.2980392156862745, 0.4470588235294118, 0.6901960784313725}
+\definecolor{green}{rgb}{0.3333333333333333, 0.6588235294117647, 0.40784313725490196}
+\definecolor{red}{rgb}{0.7686274509803922, 0.3058823529411765, 0.3215686274509804}
+\definecolor{purple}{rgb}{0.5058823529411764, 0.4470588235294118, 0.6980392156862745}
+\definecolor{yellow}{rgb}{0.8, 0.7254901960784313, 0.4549019607843137}
+\definecolor{lightblue}{rgb}{0.39215686274509803, 0.7098039215686275, 0.803921568627451}
+
+\newenvironment{variableblock}[3]{%
+  \setbeamercolor{block body}{#2}
+  \setbeamercolor{block title}{#3}
+  \begin{block}{#1}}{\end{block}}
+
+\newenvironment{redblock}[1]{%
+  \begin{variableblock}{#1}{bg=red!20,fg=black}{bg=red,fg=white}}{\end{variableblock}}
+\newenvironment{greenblock}[1]{%
+  \begin{variableblock}{#1}{bg=green!20,fg=black}{bg=green,fg=white}}{\end{variableblock}}
+
+\newenvironment{blueblock}[1]{%
+  \begin{variableblock}{#1}{bg=blue!20,fg=black}{bg=blue,fg=white}}{\end{variableblock}}
+\newenvironment{yellowblock}[1]{%
+  \begin{variableblock}{#1}{bg=yellow!20,fg=black}{bg=yellow,fg=white}}{\end{variableblock}}
+
+
+
+\newenvironment{thm}[1][Theorem]{%
+    \begin{variableblock}{#1}{bg=lightblue!20,fg=black}{bg=lightblue,fg=white}}{\end{variableblock}}
+\newenvironment{lem}[1][Lemma]{%
+    \begin{variableblock}{#1}{bg=lightblue!20,fg=black}{bg=lightblue,fg=white}}{\end{variableblock}}
+\newenvironment{prop}[1][Proposition]{%
+    \begin{variableblock}{#1}{bg=blue!20,fg=black}{bg=blue,fg=white}}{\end{variableblock}}
+\newenvironment{defi}[1][Definition]{%
+    \begin{variableblock}{#1}{bg=purple!20,fg=black}{bg=purple,fg=white}}{\end{variableblock}}
+
+\usepackage{microtype}
+
+\newcommand{\includemovie}[2][]{
+    \includemedia[
+    #1,
+    activate=pageopen,transparent,
+    addresource=#2.mp4,addresource=#2.png,
+    flashvars={
+        file=#2.mp4&image=#2.png&
+        stretching=uniform&start=0&
+        screencolor=white& %improves render in light backgrounds
+        controlbar.position=over&controlbar.idlehide=true&
+        autostart=true&repeat=always&smoothing=true
+        %&bufferlength=10 % may improve repetition of short videos
+    }
+    ]{
+        %\href{run:#2.mp4}{
+            \includegraphics[#1]{#2}
+        %}
+    }{player.swf}
+}
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Motivation}
+    \begin{redblock}{Problem}
+        In practice, we can not precisely build the coils we designed.
+    \end{redblock}
+    \begin{center}
+        \includegraphics[height=3.5cm]{./img/pertubation.png}\hspace{1cm}
+        \includegraphics[height=3.5cm]{./img/unstable_minimum.png}
+    \end{center}
+    \begin{greenblock}{Conclusion}
+        We have to find minima that are robust to small perturbations of the design.
+    \end{greenblock}
+\end{frame}
+
+\begin{frame}{Modelling the perturbation}
+    \begin{itemize}
+        \item We want to model the perturbation of the coils independently from its discretisation (e.g. Fourier basis or splines).
+        \item For each coil we consider a Gaussian process $\bm{\zeta}:[0, 2\pi) \to \mathbb{R}^3$ with
+            \begin{equation}
+                \begin{aligned}
+                    \zeta_i(\phi) &\sim \Nc(0, \sigma^2) &\quad & \forall \phi\in[0,2\pi) \\
+                    \mathrm{Cov}(\zeta_i(\phi_1), \zeta_i(\phi_2))&=\sigma^2 \exp\bigg(-\frac{(\phi_1-\phi_2)^2}{l^2} \bigg)&&\forall \phi_1, \phi_2\in[0,2\pi)
+                \end{aligned}
+            \end{equation}
+    \end{itemize} 
+    \begin{center}
+        \includegraphics[height=3.5cm]{./img/gaussian_process.png}
+    \end{center}
+    \begin{itemize}
+        \item There are several families of covariance functions that result in Gaussian processes with varying level of smoothness.
+    \end{itemize}
+\end{frame}
+\begin{frame}
+    \begin{itemize}
+        \item We collect the perturbations of all coils into a single random variable $\xi$.   
+        \item For a fixed configuration $x$, $f(x, \xi)$ is now a scalar random variable.
+        \item The distribution looks something like this
+    \end{itemize}
+    \begin{center}
+        \includegraphics[height=2.5cm]{./img/distribution.png}
+    \end{center}
+\end{frame}
+\begin{frame}
+    Now take a function that maps a control and a random variable to a scalar cost / quantity of interest:
+
+    \begin{minipage}{0.7\textwidth}
+        \begin{equation}
+            (x, \xi) \mapsto f(x, \xi)
+        \end{equation}
+        \begin{itemize}
+            \item Deterministic
+                \begin{equation}
+                    \min_{x} f(x, 0)
+                \end{equation}
+            \item Risk-Neutral
+                \begin{equation}
+                    \min_{x} \mathbb{E}[f(x, \xi)]
+                \end{equation}
+            \item Robust
+                \begin{equation}
+                    \min_{x} \max_{\xi} f(x, \xi)
+                \end{equation}
+            \item Risk-Averse, many formulations e.g.
+                \begin{equation}
+                    \begin{aligned}
+                        &\min_{x} \mathbb{E}[f(x, \xi)] + \gamma\mathrm{Var}[f(x, \xi)]\\
+                        &\min_{x} \mathrm{VaR}[f(x, \xi)]\\
+                        &\min_{x} \mathrm{CVaR}[f(x, \xi)]
+                    \end{aligned}
+                \end{equation}
+        \end{itemize}
+    \end{minipage}
+\end{frame}
+\begin{frame}
+    \begin{itemize}
+        \item To approximate stochastic quantities such as the expected value, variance or VaR and CVaR we use standard Monte Carlo and sample perturbations $\xi^{(1)}, \ldots, \xi^{(N)}$.
+        \item The risk neutral optimisation problem then becomes
+            \begin{equation}
+                \min_{x} \frac1N \sum_{i=1}^N f(x, \xi^{(i)}).
+            \end{equation}
+    \end{itemize}
+\end{frame}
+\begin{frame}{Deterministic vs stochastic optimisation}
+    \begin{itemize}
+        \item We begin by running the deterministic optimisation.
+        \item Now we draw $1\,000$ perturbed coil configurations, and compute the objective value for each configuration at each iteration. We compute the sample mean and quantiles at each iteration.
+            \begin{center}
+                \includegraphics[width=0.9\textwidth]{./img/convergence_objective_det.png}
+            \end{center}
+    \end{itemize}
+\end{frame}
+\begin{frame}
+    \begin{center}
+        \includegraphics[width=0.49\textwidth]{./img/convergence_objective_det_tall.png}
+        \includegraphics[width=0.49\textwidth]{./img/convergence_objective_stoch_tall.png}
+    \end{center}
+\end{frame}
+\begin{frame}
+    \begin{center}
+        \includegraphics[width=0.89\textwidth]{./img/histogram_comparison.png}
+    \end{center}
+\end{frame}
+\end{document}

@@ -1,0 +1,99 @@
+\usepackage{xparse}
+
+\newtheoremstyle{lemm}% name
+{0pt}%      Space above
+{0pt}%      Space below
+{\itshape}%         Body font
+{}%         Indent amount (empty = no indent, \parindent = para indent)
+{\bfseries}% Thm head font
+{.}%        Punctuation after thm head
+{\newline}%     Space after thm head: " " = normal interword space;
+%       \newline = linebreak
+{}%         Thm head spec (can be left empty, meaning `normal')
+
+
+\theoremstyle{lemm}
+
+\newtheorem{lemm}{Lemma}[chapter]
+\newtheorem{propo}[lemm]{Proposition}
+\newtheorem{problem}[lemm]{Problem}
+\newtheorem{theom}[lemm]{Theorem}
+\newtheorem{korr}[lemm]{Corollary}
+\newtheorem{defin}[lemm]{Definition}
+%\newtheorem{bspn}[lemm]{Beispiel}
+\newtheoremstyle{example}% name
+{4pt}%      Space above
+{4pt}%      Space below
+{\itshape}%         Body font
+{}%         Indent amount (empty = no indent, \parindent = para indent)
+{\bfseries}% Thm head font
+{.}%        Punctuation after thm head
+{ }%     Space after thm head: " " = normal interword space;
+%       \newline = linebreak
+{}%         Thm head spec (can be left empty, meaning `normal')
+
+\theoremstyle{example}
+\newtheorem{examp}[lemm]{Example}
+\newtheoremstyle{remark}% name
+{4pt}%      Space above
+{4pt}%      Space below
+{\itshape}%         Body font
+{}%         Indent amount (empty = no indent, \parindent = para indent)
+{\bfseries}% Thm head font
+{.}%        Punctuation after thm head
+{ }%     Space after thm head: " " = normal interword space;
+%       \newline = linebreak
+{}%         Thm head spec (can be left empty, meaning `normal')
+
+\theoremstyle{remark}
+\newtheorem{rem}[lemm]{Remark}
+\newtheorem*{nota}{Notation}
+\newtheorem*{proper}{Properties}
+
+
+\usepackage{framed}
+
+\makeatletter
+\newcommand{\colorprovide}[2]{%
+\@ifundefinedcolor{#1}{\colorlet{#1}{#2}}{}}
+\makeatother
+
+\colorprovide{thmcolor}{blue!20}
+\colorprovide{corcolor}{gray!15}
+\colorprovide{deficolor}{orange!20}
+\colorprovide{lemcolor}{gray!15}
+\colorprovide{propcolor}{blue!15}
+
+\NewDocumentEnvironment{thm}{oo}{\colorlet{shadecolor}{thmcolor}%
+    \begin{shaded}\IfNoValueTF{#1}{\begin{theom}}{\begin{theom}[#1]}%
+    \IfNoValueTF{#2}{\!}{#2~\!\!\!}}%
+{\end{theom}\end{shaded}}
+
+
+\NewDocumentEnvironment{cor}{oo}{\colorlet{shadecolor}{corcolor}%
+    \begin{shaded}\IfNoValueTF{#1}{\begin{korr}}{\begin{korr}[#1]}%
+    \IfNoValueTF{#2}{\!}{#2~\!\!\!}}%
+{\end{korr}\end{shaded}}
+
+\NewDocumentEnvironment{defi}{oo}{\colorlet{shadecolor}{deficolor}%
+    \begin{shaded}\IfNoValueTF{#1}{\begin{defin}}{\begin{defin}[#1]}%
+    \IfNoValueTF{#2}{\!}{#2~\!\!\!}}%
+{\end{defin}\end{shaded}}
+
+\NewDocumentEnvironment{lem}{oo}{\colorlet{shadecolor}{lemcolor}%
+    \begin{shaded}\IfNoValueTF{#1}{\begin{lemm}}{\begin{lemm}[#1]}%
+    \IfNoValueTF{#2}{\!}{#2~\!\!\!}}%
+{\end{lemm}\end{shaded}}
+
+\NewDocumentEnvironment{prop}{oo}{\colorlet{shadecolor}{propcolor}%
+    \begin{shaded}\IfNoValueTF{#1}{\begin{propo}}{\begin{propo}[#1]}%
+    \IfNoValueTF{#2}{\!}{#2~\!\!\!}}%
+{\end{propo}\end{shaded}}
+
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\newcommand*\Let[2]{\State $ #1 \gets #2 $}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
